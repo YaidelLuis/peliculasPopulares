@@ -1,5 +1,5 @@
 import '../widgets/constants.dart';
-import '../models/pelicula.dart';
+import '../models/movie.dart';
 import '../widgets/back_button.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class DetailsScreen extends StatelessWidget {
     super.key,
     required this.pelicula,
   });
-  final Pelicula pelicula;
+  final Movie pelicula;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

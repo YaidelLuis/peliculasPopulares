@@ -10,7 +10,7 @@ class UnMovieState extends MovieState {}
 class LoadingMovieState extends MovieState {}
 
 class InMovieState extends MovieState {
-  final List<Pelicula> movies;
+  final List<Movie> movies;
 
   InMovieState({required this.movies});
 

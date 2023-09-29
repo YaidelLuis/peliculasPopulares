@@ -1,4 +1,4 @@
-import 'package:peliculas_populares/models/pelicula.dart';
+import 'package:peliculas_populares/models/movie.dart';
 
 import 'movie_provider.dart';
 
@@ -7,5 +7,5 @@ class MovieRepository {
 
   MovieRepository({this.provider = const MovieProvider()});
 
-  Future<List<Pelicula>> getPopularPeliculas() => provider.getPopularPeliculas();
+  Future<List<Movie>> getPopularPeliculas() => provider.getPopularPeliculas();
 }

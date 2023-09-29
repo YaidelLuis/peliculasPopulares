@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:peliculas_populares/models/pelicula.dart';
+import 'package:peliculas_populares/models/movie.dart';
 import 'package:peliculas_populares/screens/details_screen.dart';
 import 'package:peliculas_populares/widgets/constants.dart';
 
@@ -10,7 +10,7 @@ class PopularSlider extends StatelessWidget {
     required this.snapshot,
   });
 
-  final List<Pelicula> snapshot;
+  final List<Movie> snapshot;
 
   @override
   Widget build(BuildContext context) {

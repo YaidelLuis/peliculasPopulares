@@ -1,4 +1,4 @@
-class Pelicula {
+class Movie {
   String title;
   String backDropPath;
   String originalTitle;
@@ -7,7 +7,7 @@ class Pelicula {
   String releaseDate;
   double voteAverage;
 
-  Pelicula({
+  Movie({
     required this.title,
     required this.backDropPath,
     required this.originalTitle,
@@ -17,8 +17,8 @@ class Pelicula {
     required this.voteAverage,
   });
 
-  factory Pelicula.fromJson(Map<String, dynamic> json) {
-    return Pelicula(
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
       title: json["title"],
       backDropPath: json["backdrop_path"],
       originalTitle: json["original_title"],
