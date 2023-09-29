@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:peliculas_populares/models/pelicula.dart';
 import 'package:peliculas_populares/screens/details_screen.dart';
 import 'package:peliculas_populares/widgets/constants.dart';
 
@@ -9,7 +10,7 @@ class PopularSlider extends StatelessWidget {
     required this.snapshot,
   });
 
-  final AsyncSnapshot snapshot;
+  final List<Pelicula> snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class PopularSlider extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: CarouselSlider.builder(
-          itemCount: snapshot.data!.length,
+          itemCount: snapshot.length,
           options: CarouselOptions(
             height: 400,
             autoPlay: true,
@@ -35,7 +36,7 @@ class PopularSlider extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DetailsScreen(
-                      pelicula: snapshot.data[itemIndex],
+                      pelicula: snapshot[itemIndex],
                     ),
                   ),
                 );
@@ -48,7 +49,7 @@ class PopularSlider extends StatelessWidget {
                   child: Image.network(
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
-                    '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+                    '${Constants.imagePath}${snapshot[itemIndex].posterPath}',
                   ),
                 ),
               ),

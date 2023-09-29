@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peliculas_populares/bloc/movie_bloc.dart';
+import 'package:peliculas_populares/bloc/movie_repository.dart';
 import 'package:peliculas_populares/screens/home_screen.dart';
 
 void main() {
@@ -17,7 +20,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF23272E),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: BlocProvider<MovieBloc>(
+        create: (_) => MovieBloc(MovieRepository()),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

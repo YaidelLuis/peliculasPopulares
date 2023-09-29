@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas_populares/api/api.dart';
-import 'package:peliculas_populares/models/pelicula.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peliculas_populares/bloc/movie_bloc.dart';
 import 'package:peliculas_populares/widgets/popular_slider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,11 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Pelicula>> popularPeliculas;
+  late MovieBloc bloc;
   @override
   void initState() {
     super.initState();
-    popularPeliculas = Api().getPopularPeliculas();
+    bloc = context.read<MovieBloc>();
+    bloc.add(LoadingMovieEvent());
   }
 
   @override
@@ -35,23 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                child: FutureBuilder(
-                    future: popularPeliculas,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(snapshot.error.toString()),
-                        );
-                      } else if (snapshot.hasData) {
-                        return PopularSlider(
-                          snapshot: snapshot,
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
+                child: BlocBuilder<MovieBloc, MovieState>(
+                  builder: (BuildContext context, MovieState state) {
+                    if (state is ErrorMovieState) {
+                      return Center(child: Text(state.message));
+                    } else if (state is LoadingMovieState) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is InMovieState) {
+                      return PopularSlider(
+                        snapshot: state.movies,
+                      );
+                    }
+                    return Container();
+                  },
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 100),

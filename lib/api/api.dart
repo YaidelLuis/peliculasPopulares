@@ -1,10 +1,11 @@
 import 'dart:convert';
-
 import 'package:peliculas_populares/models/pelicula.dart';
 import 'package:peliculas_populares/widgets/constants.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
+  const Api();
+
   static const _popularUrl =
       'https://api.themoviedb.org/3/movie/popular?api_key=${Constants.apiKey}';
 
