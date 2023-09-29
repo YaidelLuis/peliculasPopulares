@@ -72,7 +72,7 @@ class DetailsScreen extends StatelessWidget {
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Row(
+                          child: Column(
                             children: [
                               const Text(
                                 'Release date: ',
