@@ -53,10 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     }),
               ),
-              SizedBox(
-                child: Center(child: Container()),
+              const Padding(
+                padding: EdgeInsets.only(top: 100),
+                child: Text(
+                  "Listado de las películas más populares del sitio The Movie DB (TMBD). Toque su película favorita y acceda a una breve descripción.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ),
-              const Text("yaidel"),
             ],
           ),
         ),
