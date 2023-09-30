@@ -1,19 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:peliculas_populares/bloc/movie_bloc.dart';
 import 'package:peliculas_populares/models/movie.dart';
-import 'package:peliculas_populares/screens/details_screen.dart';
 import 'package:peliculas_populares/widgets/constants.dart';
+import 'package:provider/provider.dart';
 
 class PopularSlider extends StatelessWidget {
-  const PopularSlider({
+  PopularSlider({
     super.key,
     required this.snapshot,
   });
 
   final List<Movie> snapshot;
+  late MovieBloc bloc;
 
   @override
   Widget build(BuildContext context) {
+    bloc = Provider.of<MovieBloc>(context);
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: SizedBox(
@@ -32,14 +35,7 @@ class PopularSlider extends StatelessWidget {
           itemBuilder: (context, itemIndex, pageViewIndex) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(
-                      pelicula: snapshot[itemIndex],
-                    ),
-                  ),
-                );
+                bloc.add(LoadingMovieDetailsEvent(id: snapshot[itemIndex].id));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),

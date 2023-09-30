@@ -18,6 +18,15 @@ class InMovieState extends MovieState {
   List<Object?> get props => [movies];
 }
 
+class InMovieDetailsState extends MovieState {
+  final Details details;
+
+  InMovieDetailsState({required this.details});
+
+  @override
+  List<Object?> get props => [details];
+}
+
 class ErrorMovieState extends MovieState {
   final String message;
 

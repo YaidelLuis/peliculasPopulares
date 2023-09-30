@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peliculas_populares/bloc/movie_bloc.dart';
+import 'package:peliculas_populares/screens/details_screen.dart';
 import 'package:peliculas_populares/widgets/popular_slider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,6 +38,23 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               SizedBox(
                 child: BlocBuilder<MovieBloc, MovieState>(
+                  buildWhen: (previous, current) {
+                    if (current is InMovieDetailsState) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            details: current.details,
+                            onBack: () {
+                              bloc.add(LoadingMovieEvent());
+                            },
+                          ),
+                        ),
+                      );
+                      return false;
+                    }
+                    return true;
+                  },
                   builder: (BuildContext context, MovieState state) {
                     if (state is ErrorMovieState) {
                       return Center(child: Text(state.message));

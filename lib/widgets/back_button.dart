@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas_populares/bloc/movie_bloc.dart';
+import 'package:provider/provider.dart';
 
 class BackBtn extends StatelessWidget {
-  const BackBtn({
+  final Function() onBack;
+  BackBtn({
     super.key,
+    required this.onBack,
   });
 
+  late MovieBloc bloc;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,6 +22,7 @@ class BackBtn extends StatelessWidget {
       ),
       child: IconButton(
         onPressed: () {
+          onBack.call();
           Navigator.pop(context);
         },
         icon: const Icon(

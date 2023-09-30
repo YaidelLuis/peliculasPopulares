@@ -1,28 +1,36 @@
 import '../widgets/constants.dart';
-import '../models/movie.dart';
+import '../models/details.dart';
 import '../widgets/back_button.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     super.key,
-    required this.pelicula,
+    required this.details,
+    required this.onBack,
   });
-  final Movie pelicula;
+  final Details details;
+  final Function onBack;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        shrinkWrap: true,
         slivers: [
           SliverAppBar.large(
-            leading: const BackBtn(),
+            leading: BackBtn(
+              onBack: () {
+                onBack.call();
+              },
+            ),
             backgroundColor: const Color(0xFF23272E),
             expandedHeight: 500,
             pinned: true,
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                pelicula.title,
+                details.originalTitle,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
@@ -34,7 +42,7 @@ class DetailsScreen extends StatelessWidget {
                   bottomRight: Radius.circular(24),
                 ),
                 child: Image.network(
-                  '${Constants.imagePath}${pelicula.posterPath}',
+                  '${Constants.imagePath}${details.posterPath}',
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.fill,
                 ),
@@ -46,6 +54,20 @@ class DetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 50,
+                    width: 300,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: details.genres.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(details.genres[index].name),
+                          );
+                        }),
+                  ),
                   const Text(
                     'Overview',
                     style: TextStyle(
@@ -55,7 +77,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    pelicula.overview,
+                    details.overview,
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w400,
@@ -82,7 +104,7 @@ class DetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                pelicula.releaseDate,
+                                details.releaseDate,
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -111,7 +133,7 @@ class DetailsScreen extends StatelessWidget {
                                 color: Colors.amber,
                               ),
                               Text(
-                                '${pelicula.voteAverage.toStringAsFixed(1)}/10',
+                                '${details.voteAverage.toStringAsFixed(1)}/10',
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -119,7 +141,7 @@ class DetailsScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
