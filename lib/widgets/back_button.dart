@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas_populares/bloc/movie_bloc.dart';
-import 'package:provider/provider.dart';
 
 class BackBtn extends StatelessWidget {
   final Function() onBack;
