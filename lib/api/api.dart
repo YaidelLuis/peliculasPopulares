@@ -10,8 +10,6 @@ class Api {
   final _popularUrl =
       '${Constants.baseURL}movie/popular?api_key=${Constants.apiKey}';
 
-  //https://api.themoviedb.org/3/movie/565770?api_key=fe8f0b7181fc554c57f575395f55a971
-
   Future<List<Movie>> getPopularMovie() async {
     final response = await http.get(Uri.parse(_popularUrl));
     if (response.statusCode == 200) {
