@@ -15,6 +15,12 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+
+## Instrucciones para correr proyecto en VSCode:
+
+Para desplegar la app en VSCode cargue el proyecto y seleccione el dispositivo (fisico conectado por usb o emulador virtual generado por Android Studio) y debuguear con F5., asegurese de tener una coexion estable a internet para que se instalen correctamente los paquetes definidos .
+
+## Pruebas unitarias:
 Para realizar pruebas unitarias acceder al directorio peliculas_populares/test/unit_test y ahi se encuentra el archivo movie_bloc_test.dart, en este archivo esta enfocado a realizar 3 pruebas unitarias a la logica del bloc el cual es quien maneja los estados y enventos de la app.
 
 Ejecuta las pruebas usando:
