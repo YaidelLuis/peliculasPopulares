@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,15 +16,23 @@ void main() {
   setUpAll(() {
     repository = MockMovieRepository();
     details = Details(
-        originalTitle: 'asdasdasd',
-        overview: 'adasdadasd',
-        releaseDate: 'adasdasd',
+        originalTitle: 'originalTitle',
+        overview: 'overview',
+        releaseDate: 'releaseDate',
         voteAverage: 6.4,
-        posterPath: 'ssdsd',
-        genres: [Genre(id: 1, name: 'aqwew'), Genre(id: 2, name: 'ewrwerw')]);
+        posterPath: 'posterPath',
+        genres: [Genre(id: 1, name: 'genre1'), Genre(id: 2, name: 'genre2')]);
     movies = [
-      Movie(id: 1, title: 'XXX', backDropPath: 'asdasd', posterPath: 'asdasd'),
-      Movie(id: 2, title: 'YYY', backDropPath: 'qweqe', posterPath: 'retert'),
+      Movie(
+          id: 1,
+          title: 'peli1',
+          backDropPath: 'backDropPathPeli1',
+          posterPath: 'posterPathPeli1'),
+      Movie(
+          id: 2,
+          title: 'peli2',
+          backDropPath: 'backDropPathPeli2',
+          posterPath: 'posterPathPeli2'),
     ];
   });
   group("pruebas unitarias al bloc movie", () {
@@ -33,7 +40,7 @@ void main() {
       'probar cambio de estados cuando se realiza el evento devolver peliculas populares',
       build: () => MovieBloc(repository),
       act: (bloc) {
-        when(() => repository.getPopularPeliculas())
+        when(() => repository.getPopularMovies())
             .thenAnswer((_) async => movies);
         bloc.add(LoadingMovieEvent());
       },
@@ -42,10 +49,10 @@ void main() {
     );
 
     blocTest<MovieBloc, MovieState>(
-      'error',
+      'Exception',
       build: () => MovieBloc(repository),
       act: (bloc) {
-        when(() => repository.getPopularPeliculas())
+        when(() => repository.getPopularMovies())
             .thenThrow((_) => Exception('asdasdasdsd'));
         bloc.add(LoadingMovieEvent());
       },

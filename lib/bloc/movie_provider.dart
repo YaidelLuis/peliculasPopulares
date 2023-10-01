@@ -6,7 +6,7 @@ class MovieProvider {
   final Api api;
   const MovieProvider({this.api = const Api()});
 
-  Future<List<Movie>> getPopularPeliculas() => api.getPopularMovie();
+  Future<List<Movie>> getPopularMovies() => api.getPopularMovie();
 
   Future<Details> getMovieDetails(int id) => api.getMovieDetails(id);
 }

@@ -7,6 +7,6 @@ class MovieRepository {
 
   MovieRepository({this.provider = const MovieProvider()});
 
-  Future<List<Movie>> getPopularPeliculas() => provider.getPopularPeliculas();
+  Future<List<Movie>> getPopularMovies() => provider.getPopularMovies();
   Future<Details> getMovieDetails(int id) => provider.getMovieDetails(id);
 }

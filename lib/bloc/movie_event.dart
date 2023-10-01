@@ -9,7 +9,7 @@ class LoadingMovieEvent extends MovieEvent {
   Future<void> handleEvent(emit, bloc) async {
     emit(LoadingMovieState());
     try {
-      var movies = await bloc.repository.getPopularPeliculas();
+      var movies = await bloc.repository.getPopularMovies();
       emit(InMovieState(movies: movies));
     } catch (e) {
       emit(ErrorMovieState(message: e.toString()));
